@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://b177p32q2fpl6"]
+
+[ext_resource type="Script" path="res://bullet.gd" id="1_4um5d"]
+[ext_resource type="Texture2D" uid="uid://uvcltx3enw7n" path="res://asset/shot.png" id="1_rs7yh"]
+[ext_resource type="AudioStream" uid="uid://bqagdd8q10ngc" path="res://asset/click_002.ogg" id="3_r70i5"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gkc8y"]
+radius = 3.0
+
+[node name="Bullet" type="CharacterBody2D"]
+collision_mask = 2
+script = ExtResource("1_4um5d")
+
+[node name="Coll" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_gkc8y")
+
+[node name="Ball" type="Sprite2D" parent="."]
+texture = ExtResource("1_rs7yh")
+
+[node name="Visibility" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="Song" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_r70i5")
+autoplay = true
+
+[connection signal="screen_exited" from="Visibility" to="." method="_on_visibility_screen_exited"]

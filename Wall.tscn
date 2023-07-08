@@ -1,0 +1,65 @@
+[gd_scene load_steps=7 format=3 uid="uid://bvvcgd3qv8nm4"]
+
+[ext_resource type="Texture2D" uid="uid://cs362rao7ie0e" path="res://asset/pared.png" id="1_pcdhu"]
+[ext_resource type="Script" path="res://Wall.gd" id="1_qvp7g"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qmxk7"]
+size = Vector2(24, 224)
+
+[sub_resource type="Animation" id="Animation_lxvrd"]
+resource_name = "Init"
+length = 1.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0.776471, 0.380392, 0.356863, 1), Color(0.941176, 0.105882, 0.301961, 1), Color(0.607843, 0.482353, 0.27451, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_605n7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.001),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.776471, 0.380392, 0.356863, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_b8m07"]
+_data = {
+"Init": SubResource("Animation_lxvrd"),
+"RESET": SubResource("Animation_605n7")
+}
+
+[node name="Pared" type="StaticBody2D" groups=["Wall"]]
+position = Vector2(128, 56)
+collision_layer = 2
+script = ExtResource("1_qvp7g")
+metadata/_edit_group_ = true
+
+[node name="Col" type="CollisionShape2D" parent="."]
+position = Vector2(12, 96)
+shape = SubResource("RectangleShape2D_qmxk7")
+
+[node name="Img" type="Sprite2D" parent="Col"]
+position = Vector2(0, 3.8147e-06)
+scale = Vector2(4.8, 8.96)
+texture = ExtResource("1_pcdhu")
+
+[node name="AnPlay" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_b8m07")
+}
